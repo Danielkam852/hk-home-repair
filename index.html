@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>香港專業家居維修 - 明碼實價、即時報價</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* CSS Reset & 基本設定 (Mobile-First) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft JhengHei", sans-serif;
+        }
+
+        :root {
+            --primary-color: #007bff; /* 專業藍色 */
+            --whatsapp-color: #25D366; /* WhatsApp 綠色 */
+            --dark-color: #333333;
+            --light-bg: #f8f9fa;
+            --warning-color: #ffc107;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: var(--dark-color);
+            line-height: 1.6;
+            padding-bottom: 60px; /* 為底部預留空間 */
+        }
+
+        .container {
+            padding: 20px 15px;
+        }
+
+        /* 頂部 Header */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Hero Banner 大橫額 */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('images/banner.jpg') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .hero h1 {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .hero p {
+            font-size: 1rem;
+            margin-bottom: 25px;
+            color: #f0f0f0;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+
+        /* 動態呼籲按鈕 (CTA) */
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--whatsapp-color);
+            color: white;
+            text-decoration: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.5);
+            transition: transform 0.2s;
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .cta-btn:active {
+            transform: scale(0.98);
+        }
+
+        .cta-btn i {
+            margin-right: 8px;
+            font-size: 1.4rem;
+        }
+
+        .cta-subtext {
+            display: block;
+            font-size: 0.85rem;
+            color: #ffffff;
+            margin-top: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 4px 12px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        /* 區塊標題 */
+        section h2 {
+            text-align: center;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        /* 明碼實價價目表 */
+        .price-section {
+            background-color: var(--light-bg);
+        }
+
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
+        }
+
+        .price-table th, .price-table td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        .price-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 1rem;
+        }
+
+        .price-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .price-table tr {
+            border-bottom: 1px solid #eee;
+        }
+
+        .price-tag {
+            color: #d9534f;
+            font-weight: bold;
+        }
+
+        .disclaimer {
+            font-size: 0.8rem;
+            color: #666;
+            background-color: #fff3cd;
+            border-left: 4px solid var(--warning-color);
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        /* 工程案例相簿 (Before & After 分類) */
+        .tab-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            overflow-x: auto; /* 手機上可左右滑動分類 */
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 5px;
+        }
+
+        .tab-btn {
+            background: #eee;
+            border: none;
+            padding: 8px 16px;
+            margin-right: 5px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #555;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .tab-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .gallery-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .case-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            display: none; /* 由 JS 控制顯示 */
+        }
+
+        .case-title {
+            padding: 10px;
+            font-weight: bold;
+            font-size: 1rem;
+            background: #f1f1f1;
+            color: #333;
+        }
+
+        .img-box {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .img-box img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        /* 底部資訊 */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.85rem;
+        }
+
+        /* 右下角永遠懸浮的 WhatsApp 掣 */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--whatsapp-color);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            z-index: 999;
+            text-decoration: none;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* 桌上型電腦排版優化 (當螢幕大於 768px 時) */
+        @media (min-width: 768px) {
+            .container { max-width: 800px; margin: 0 auto; }
+            .hero { padding: 75px 20px; }
+            .hero h1 { font-size: 2.2rem; }
+            .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo"><i class="fa-solid fa-screwdriver-wrench"></i> 香港專業家居維修</div>
+        <a href="https://wa.me/85291366527?text=你好，我想查詢家居維修報價。" class="tab-btn active" style="margin:0; padding:5px 12px; font-size:0.8rem;"><i class="fab fa-whatsapp"></i> 立即報價</a>
+    </header>
+
+    <section class="hero">
+        <h1>香港專業家居維修<br><span style="color:var(--warning-color)">明碼實價 絕不坐地起價</span></h1>
+        <p>漏水、塞渠、換鎖、油漆翻新？一鍵拍照即時報價</p>
+        
+        <a href="https://wa.me/85291366927?text=你好，我有位置需要維修，這是現場相片：" class="cta-btn">
+            <i class="fab fa-whatsapp"></i> 👉 立即 WhatsApp 拍照報價
+        </a>
+        <div>
+            <span class="cta-subtext">⚡ 專人 10 分鐘內回覆</span>
+        </div>
+    </section>
+
+    <section class="container price-section" id="prices">
+        <h2>明碼實價價目表</h2>
+        
+        <table class="price-table">
+            <thead>
+                <tr>
+                    <th>服務項目</th>
+                    <th>基本參考價 (港幣)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>更換廚廁水龍頭</td>
+                    <td class="price-tag">$450 起</td>
+                </tr>
+                <tr>
+                    <td>一般企缸/高壓通渠</td>
+                    <td class="price-tag">$600 起</td>
+                </tr>
+                <tr>
+                    <td>更換大門鎖 / 電子鎖</td>
+                    <td class="price-tag">$500 起</td>
+                </tr>
+                <tr>
+                    <td>大門舊鎖更換不銹鋼大閘鎖</td>
+                    <td class="price-tag">$700 起</td>
+                </tr>
+                <tr>
+                    <td>廚房廚櫃底漏水修復</td>
+                    <td class="price-tag">$800 起</td>
+                </tr>
+                <tr>
+                    <td>浴室天花漏水剝落修補</td>
+                    <td class="price-tag">$1,200 起</td>
+                </tr>
+                <tr>
+                    <td>局部天花/牆身防漏防水</td>
+                    <td class="price-tag">$1,500 起</td>
+                </tr>
+                <tr>
+                    <td>全屋油漆局部翻新</td>
+                    <td class="price-tag">現場面議</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="disclaimer">
+            <strong>⚠️ 重要提示：</strong> 由於維修涉及現場實際破損情況、材料選用及施工難度，以上均為基本工費參考。最終實際報價以現場環境或 WhatsApp 相片評估為準，絕無隱藏收費。
+        </div>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="https://wa.me/85291366927?text=你好，想查詢價目表上的維修項目：" class="cta-btn">
+                <i class="fab fa-whatsapp"></i> 發相片免費估價
+            </a>
+        </div>
+    </section>
+
+    <hr style="border: 0; height: 1px; background: #eee;">
+
+    <section class="container" id="gallery">
+        <h2>師傅工程案例 (Before & After)</h2>
+        
+        <div class="tab-container">
+            <button class="tab-btn active" onclick="filterGallery('all', event)">全部案例</button>
+            <button class="tab-btn" onclick="filterGallery('water', event)">水電通渠</button>
+            <button class="tab-btn" onclick="filterGallery('lock', event)">開鎖換鎖</button>
+            <button class="tab-btn" onclick="filterGallery('waterproof', event)">防水修補</button>
+            <button class="tab-btn" onclick="filterGallery('paint', event)">油漆翻新</button>
+        </div>
+
+        <div class="gallery-grid">
+            
+            <div class="case-card water">
+                <div class="case-title">廚房廚櫃底漏水修復</div>
+                <div class="img-box">
+                    <img src="images/廚房廚櫃底漏水修復.jpg" alt="廚房廚櫃底漏水修復 Before & After">
+                </div>
+            </div>
+
+            <div class="case-card water">
+                <div class="case-title">更換廚廁水龍頭</div>
+                <div class="img-box">
+                    <img src="images/更換廚廁水龍頭.jpg" alt="更換廚廁水龍頭 Before & After">
+                </div>
+            </div>
+
+            <div class="case-card water">
+                <div class="case-title">一般企缸 / 高壓通渠</div>
+                <div class="img-box">
+                    <img src="images/一般企缸高壓通渠.jpg" alt="一般企缸/高壓通渠 Before & After">
+                </div>
+            </div>
+
+            <div class="case-card lock">
+                <div class="case-title">大門舊鎖更換不銹鋼大閘鎖</div>
+                <div class="img-box">
+                    <img src="images/大門舊鎖更換不銹鋼大閘鎖.jpg" alt="大門舊鎖更換不銹鋼大閘鎖 Before & After">
+                </div>
+            </div>
+
+            <div class="case-card lock">
+                <div class="case-title">更換大門大門鎖 / 電子鎖</div>
+                <div class="img-box">
+                    <img src="images/更換大門大門鎖-電子鎖.jpg" alt="更換大門大門鎖 / 電子鎖 Before & After">
+                </div>
+            </div>
+
+            <div class="case-card waterproof">
+                <div class="case-title">浴室天花漏水剝落修補</div>
+                <div class="img-box">
+                    <img src="images/浴室天花漏水剝落修補.jpg" alt="浴室天花漏水剝落修補 Before & After">
+                </div>
+            </div>
+
+            <div class="case-card waterproof">
+                <div class="case-title">局部天花 / 牆身防漏防水</div>
+                <div class="img-box">
+                    <img src="images/局部天花-牆身防漏防水.jpg" alt="局部天花/牆身防漏防水 Before & After">
+                </div>
+            </div>
+
+            <div class="case-card paint">
+                <div class="case-title">全屋油漆局部翻新</div>
+                <div class="img-box">
+                    <img src="images/全屋油漆局部翻新.jpg" alt="全屋油漆局部翻新 Before & After">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 香港專業家居維修公司</p>
+        <p style="font-size: 0.75rem; margin-top: 5px; color: #aaa;">服務全港九新界，歡迎住宅、商舖、寫字樓查詢。</p>
+    </footer>
+
+    <a href="https://wa.me/85291366927?text=你好，我家中有東西需要維修，想拍照片找師傅報價。" class="floating-whatsapp" target="_blank" aria-label="WhatsApp 報價">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        function filterGallery(category, event) {
+            // 更新 Tab 按鈕樣式
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            if (event) {
+                event.target.classList.add('active');
+            }
+
+            // 篩選案例圖片
+            const cards = document.querySelectorAll('.case-card');
+            cards.forEach(card => {
+                if (category === 'all') {
+                    card.style.display = 'block';
+                } else if (card.classList.contains(category)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // 頁面載入時預設顯示全部
+        window.onload = function() {
+            filterGallery('all');
+        };
+    </script>
+</body>
+</html>
